@@ -16,10 +16,10 @@ def payment_process(request):
     order = get_object_or_404(Order, id=order_id)
 
     if request.method == 'POST':
-        success_url = request.build_abcolute_uri(
+        success_url = request.build_absolute_uri(
             reverse('payment:completed')
         )
-        cancel_url = request.build_abcolute_uri(
+        cancel_url = request.build_absolute_uri(
             reverse('payment:canceled')
         )
         # Stripe checkout session data
@@ -36,7 +36,7 @@ def payment_process(request):
                 {
                     'price_data': {
                         'unit_amount': int(item.price * Decimal('100')),
-                        'currncy': 'usd',
+                        'currency': 'usd',
                         'product_data': {
                             'name': item.product.name,
                         },
